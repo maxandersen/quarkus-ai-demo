@@ -94,3 +94,8 @@ A [PerformanceTest.kt](ai-server/src/test/kotlin/PerformanceTest.kt)
     Completed 50 requests in 1.029352917s
     Success: 50, Failures: 0
 ```
+
+### Note on Coroutine parallelism
+
+Kotlin [IO Dispatcher](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-i-o.html) is limited to 64 threads by default. System property `kotlinx.coroutines.io.parallelism` can be used to override this value. If 64 is too small, then using dispatcher built from `newVirtualThreadPerTaskExecutor` would be a safe choice in JDK 24 for most scenarios, except native calls, since virtual thread pinning is no longer an issue ([JEP 491: Synchronize Virtual Threads without Pinning](https://openjdk.org/jeps/491)).
+
