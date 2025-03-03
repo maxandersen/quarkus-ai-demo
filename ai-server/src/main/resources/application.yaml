@@ -1,3 +1,4 @@
+
 quarkus:
   application:
     name: ai-server
@@ -16,3 +17,6 @@ quarkus:
     metrics:
       enabled: true
 
+  langchain4j:
+    openai:
+      api-key: "sk_xxx"

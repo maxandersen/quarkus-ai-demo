@@ -57,6 +57,51 @@ curl -X POST http://localhost:8080/lc4j/suspend \
 }' | jq
 ```
 
+## Demo 2 - Service with Mock Openai
+
+1. Run [LlmSimulator.kt](ai-server/src/test/kotlin/LlmSimulator.kt) - Starts MockOpenai on port 8089
+
+2. [application-dev.yaml](ai-server/src/main/resources/application-dev.yaml) has OpenAI test URL
+```yaml
+quarkus:
+  langchain4j:
+    openai:
+      base-url: http://localhost:8089/v1/ #local development
+      api-key: "sk_dummy"
+```
+
+Good request, poem expected
+```shell
+curl -X POST http://localhost:8080/lc4j/poem \
+-H "Content-Type: application/json" \
+-d '{
+  "topic": "Mermaid",
+  "lines": 5
+}' | jq
+```
+
+Testing `@Fallback`
+
+Simulate error 500 from OpenAI
+```shell
+curl -X POST http://localhost:8080/lc4j/poem \
+-H "Content-Type: application/json" \
+-d '{
+  "topic": "Boom",
+  "lines": 5
+}' | jq
+```
+
+Simulate 8 seconds delay, when timeout is 7 seconds
+```shell
+curl -X POST http://localhost:8080/lc4j/poem \
+-H "Content-Type: application/json" \
+-d '{
+  "topic": "Slow",
+  "lines": 5
+}' | jq
+```
+
 ## Performance test
 
 A [PerformanceTest.kt](ai-server/src/test/kotlin/PerformanceTest.kt) 

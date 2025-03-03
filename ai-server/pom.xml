@@ -13,6 +13,7 @@
     <java.version>21</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <kotlin.compiler.languageVersion>2.1</kotlin.compiler.languageVersion>
+    <kotlin.compiler.javaParameters>true</kotlin.compiler.javaParameters>
     <kotlin.compiler.jvmTarget>${java.version}</kotlin.compiler.jvmTarget>
     <lc4j.version>1.0.0-Beta1</lc4j.version>
   </properties>
@@ -65,6 +66,15 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-messaging</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.langchain4j</groupId>
+      <artifactId>quarkus-langchain4j-openai</artifactId>
+      <version>0.25.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
+    </dependency>
     <!-- Test dependencies -->
     <dependency>
       <groupId>dev.langchain4j</groupId>
@@ -91,6 +101,9 @@
           <compilerPlugins>
             <plugin>kotlinx-serialization</plugin>
           </compilerPlugins>
+          <args>
+            <arg>-Xjvm-default=all</arg>
+          </args>
         </configuration>
         <dependencies>
           <dependency>
