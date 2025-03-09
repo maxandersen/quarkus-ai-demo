@@ -16,6 +16,7 @@
     <kotlin.compiler.javaParameters>true</kotlin.compiler.javaParameters>
     <kotlin.compiler.jvmTarget>${java.version}</kotlin.compiler.jvmTarget>
     <lc4j.version>1.0.0-Beta1</lc4j.version>
+    <ai-mocks.version>0.1.7</ai-mocks.version>
   </properties>
 
   <dependencyManagement>
@@ -37,7 +38,7 @@
       <dependency>
         <groupId>dev.langchain4j</groupId>
         <artifactId>langchain4j-bom</artifactId>
-        <version>1.0.0-beta1</version>
+        <version>${lc4j.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -83,7 +84,7 @@
     <dependency>
       <groupId>me.kpavlov.aimocks</groupId>
       <artifactId>ai-mocks-openai-jvm</artifactId>
-      <version>0.1.5</version>
+      <version>${ai-mocks.version}</version>
       <scope>test</scope>
     </dependency>
 
