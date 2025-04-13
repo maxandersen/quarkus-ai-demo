@@ -83,7 +83,7 @@
     <dependency>
       <groupId>me.kpavlov.aimocks</groupId>
       <artifactId>ai-mocks-openai-jvm</artifactId>
-      <version>0.1.10</version>
+      <version>0.2.1</version>
       <scope>test</scope>
     </dependency>
 
