@@ -49,7 +49,7 @@ internal class PoetryServiceIT {
         poem.let {
             it shouldHaveLineCount llmReply.lines().size + 1
             it shouldStartWith "In azure depths where mortal eyes see naught"
-            it shouldEndWith "©️ AI-Server, ${java.time.Year.now()}"
+            it shouldEndWith "© AI-Server, ${java.time.Year.now()}"
         }
     }
 }
