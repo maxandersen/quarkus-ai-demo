@@ -9,7 +9,6 @@ import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Tag
 import kotlin.test.Test
 
-
 @QuarkusTest
 @TestProfile(PoemTest.MockLlmProfile::class)
 class PoemTest {
@@ -25,18 +24,18 @@ class PoemTest {
         @Tag("integration")
         @Tag("rest")
     fun `LLM should generate a poem`() {
+        val lines = 3
+        val topic = "Unicorn"
         val poem = """
-                In shadowed woods where silence grows,
-                A single horn in moonlight glows.
-                Not beast, not dream, but something more—
-                A step on leaves, a myth restored.
-                Then gone, like mist from forest floor.
+                A quiet step through morning mist,
+                Horn aglow with starlight's twist,
+                It vanishes where dreams persist.
             """.trimIndent()
 
         mockOpenai.completion {
             systemMessageContains("You are a professional poet.")
-            userMessageContains("Write a poem about Unicorn")
-            userMessageContains("The poem should be 5 lines long")
+            userMessageContains("Write a poem about $topic.")
+            userMessageContains("The poem should be $lines lines long")
         } responds {
             assistantContent = poem
         }
@@ -44,8 +43,8 @@ class PoemTest {
         given()
             .body(
                 PoemRequest(
-                    topic = "Unicorn",
-                    lines = 5
+                    topic = topic,
+                    lines = lines
                 )
             )
             .contentType("application/json")
